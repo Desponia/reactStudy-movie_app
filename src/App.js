@@ -3,41 +3,32 @@ import './App.css';
 import Movie from './Movie';
 
 class App extends Component {
-  state = {
-  }
+  state = {}
 
   componentDidMount() {
-    setTimeout(() => {
-      this.setState({
-        movies: [
-          {
-            title: 'Matrix',
-            poster: 'https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/The_Matrix_soundtrack_cover.jpg/220px-The_Matrix_soundtrack_cover.jpg'
-          },
-          {
-            title: 'Full Metal Jacket',
-            poster: 'https://upload.wikimedia.org/wikipedia/en/thumb/9/99/Full_Metal_Jacket_poster.jpg/220px-Full_Metal_Jacket_poster.jpg'
-          },
-          {
-            title: 'Oldboy',
-            poster: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Archive/Search/2011/11/29/1322566607438/Oldboy-007.jpg?width=300&quality=85&auto=format&fit=max&s=3ac281a9bcd9fa4ee5ef845dfaa27728'
-          },
-          {
-            title: 'Star Wars',
-            poster: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Star_Wars_Logo.svg/1280px-Star_Wars_Logo.svg.png'
-          },
-          {
-            title: "World War Z",
-            poster: "https://www.cinesite.com/wp-content/uploads/2015/04/world_war_z_xlg-528x787.jpg"
-          }
-        ]
-      })
-    }, 3000)
+    this._getMovies()
+  }
+
+  _getMovies = async () => {
+    const movies = await this._callApi()
+    this.setState({
+      movies
+    })
+  }
+
+  _callApi = () => {
+    // TODO for test >> cors
+    return fetch('https://yts.ag/api/v2/list_movies.json?sort_by=rating')
+        .then(response => response.json())
+        // .then(res => console.log(res.data.movies))
+        .then(res => res.data.movies)
+        .catch(err => console.log(err))
   }
 
   _renderMovies = () => {
-    const movies = this.state.movies.map( (movie, index) => {
-      return <Movie title={movie.title} poster={movie.poster} key={index}/>
+    const movies = this.state.movies.map( (movie) => {
+      console.log(movie)
+      return <Movie title={movie.title} poster={movie.large_cover_image} key={movie.id}/>
     })
     return movies
   }
