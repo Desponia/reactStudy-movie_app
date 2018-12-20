@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
+// import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './Movie.css';
-
+/*
 class Movie extends Component{
 
     // TODO
@@ -20,7 +21,23 @@ class Movie extends Component{
         )
     }
 }
+*/
 
+function Movie({title, poster}) {
+    return (
+        <div>
+            <MoviePoster img={poster}/>
+            <h1>{title}</h1>
+        </div>
+    )
+}
+
+Movie.propTypes = {
+    title: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired
+}
+
+/*
 class MoviePoster extends Component{
     static propTypes = {
         poster: PropTypes.string.isRequired
@@ -31,4 +48,16 @@ class MoviePoster extends Component{
         )
     }
 }
+*/
+
+function MoviePoster({img}) {
+    return (
+        <img src={img} alt="Movie Poster"/>
+    )
+}
+
+MoviePoster.prototypes = {
+    img: PropTypes.string.isRequired
+}
+
 export default Movie
