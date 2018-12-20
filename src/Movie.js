@@ -1,28 +1,11 @@
 import React from 'react';
 // import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import LinesEllipsis from 'react-lines-ellipsis';
 import './Movie.css';
-/*
-class Movie extends Component{
 
-    // TODO
-    // yarn add prop-types
-    static propTypes = {
-        title: PropTypes.string.isRequired,
-        poster: PropTypes.string.isRequired
-    }
-
-    render() {
-        return (
-            <div>
-                <MoviePoster img={this.props.poster}/>
-                <h1>{this.props.title}</h1>
-            </div>
-        )
-    }
-}
-*/
-
+// TODO
+// yarn add react-lines-ellipsis
 function Movie({title, poster, genres, synopsis}) {
     return (
         <div className="Movie">
@@ -34,32 +17,28 @@ function Movie({title, poster, genres, synopsis}) {
                 <div className="Movie__Genres">
                     {genres.map((genre, index) => <MovieGenre genre={genre} key={index}/>)}
                 </div>
-                <p className="Movie__Synopsis">
-                    {synopsis}
-                </p>
+                <div className="Movie__Synopsis">
+                    <LinesEllipsis
+                        text={synopsis}
+                        maxLine='3'
+                        ellipsis='...'
+                        trimRight
+                        basedOn='letters'
+                    />
+                </div>
             </div>
         </div>
     )
 }
 
+// TODO
+// yarn add prop-types
 Movie.propTypes = {
     title: PropTypes.string.isRequired,
     poster: PropTypes.string.isRequired,
     synopsis: PropTypes.string.isRequired
 }
 
-/*
-class MoviePoster extends Component{
-    static propTypes = {
-        poster: PropTypes.string.isRequired
-    }
-    render() {
-        return (
-            <img src={this.props.img}/>
-        )
-    }
-}
-*/
 
 function MoviePoster({img, alt}) {
     return (

@@ -18,7 +18,7 @@ class App extends Component {
 
   _callApi = () => {
     // TODO for test >> cors
-    return fetch('https://yts.ag/api/v2/list_movies.json?sort_by=rating')
+    return fetch('https://yts.ag/api/v2/list_movies.json?sort_by=download_count')
         .then(response => response.json())
         // .then(res => console.log(res.data.movies))
         .then(res => res.data.movies)
@@ -39,9 +39,10 @@ class App extends Component {
   }
 
   render() {
+    const {movies} = this.state
     return (
-      <div className="App">
-        {this.state.movies ?  this._renderMovies() : 'Loading'}
+      <div className={movies ? "App" : "App--loading"}>
+        {movies ? this._renderMovies() : 'Loading'}
       </div>
     );
   }

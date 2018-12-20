@@ -46,4 +46,15 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
+# for add dependencies
+```
+yarn add prop-type
+yarn add react-lines-ellipsis
+```
+
+#
+```
+npm install --save react-lines-ellipsis
+```
+ https://github.com/nomadcoders/movie_app
 
